@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ *   Hook implementations for twitter_api module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function twitter_api_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.twitter_api':
+      $output = '<h3>' . t('Configuration instructions'). '</h3>';
+      $output .= '<p>';
+      $output .= t('Configuration instructions and other useful documentation can be found from <a href="@handbook-url">twitter_api Handbook</a>.', array('@handbook-url' => ''));
+      $output .='</p>';
+      return $output;
+      break;
+  }
+}
