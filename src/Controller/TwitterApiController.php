@@ -22,6 +22,10 @@ class TwitterApiController extends ControllerBase {
    *   Return Hello string.
    */
   public function process() {
+
+    // Initialize session data.
+    //session_start();
+
     return [
       '#type' => 'markup',
       '#markup' => $this->t('Implement process method..!')

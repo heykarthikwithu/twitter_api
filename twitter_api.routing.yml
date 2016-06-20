@@ -12,6 +12,16 @@ twitter_api.process:
   path: '/twitter-api/process'
   defaults:
     _controller: '\Drupal\twitter_api\Controller\TwitterApiController::process'
-    _title: 'process'
+    _title: 'Twitter Api Process'
   requirements:
     _permission: 'access content'
+
+twitter_api.config_form:
+  path: '/admin/config/twitter-api/config'
+  defaults:
+    _form: '\Drupal\twitter_api\Form\TwitterApiConfigForm'
+    _title: 'Twitter Api Configuration Form'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
