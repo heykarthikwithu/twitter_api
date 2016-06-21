@@ -21,3 +21,97 @@ function twitter_api_help($route_name, RouteMatchInterface $route_match) {
       break;
   }
 }
+
+/**
+ * Returns HybridAuth object or exception code.
+ */
+function hybridauth_get_instance() {
+  $controller = &drupal_static(__FUNCTION__, NULL);
+
+  if (!isset($controller)) {
+    $controller = FALSE;
+
+    if ($lib_path = _hybridauth_library_path()) {
+      // If Composer install was executed in the Hybridauth library use that
+      // autoloader.
+      if (file_exists($lib_path . '/../vendor/autoload.php')) {
+        require_once $lib_path . '/../vendor/autoload.php';
+      }
+      else {
+        require_once $lib_path . '/Hybrid/Auth.php';
+      }
+      $config = hybridauth_get_config();
+      try {
+        $controller = new Hybrid_Auth($config);
+      }
+      catch(Exception $e) {
+        watchdog_exception('hybridauth', $e);
+        $controller = $e->getCode();
+      }
+    }
+  }
+
+  return $controller;
+}
+
+/**
+ * Returns the path to the HybridAuth library.
+ */
+function _hybridauth_library_path() {
+  $library_path = 'modules/twitter_api/vendor/hybridauth/hybridauth/hybridauth';
+  return $library_path;
+}
+
+/**
+ * Returns HybridAuth config.
+ */
+function hybridauth_get_config() {
+  $config = &drupal_static(__FUNCTION__, NULL);
+
+  if (!isset($config)) {
+    /*$logfile = file_directory_temp() . '/hybridauth.debug.log';
+    $hybridauth_debug = variable_get('hybridauth_debug', 0);
+    if ($hybridauth_debug && file_put_contents($logfile, PHP_EOL . 'HYBRIDAUTH DEBUG LOG START' . PHP_EOL . PHP_EOL, FILE_APPEND) === FALSE) {
+      watchdog('hybridauth', 'Failed to write to debug log file @logfile.', array('@logfile' => $logfile), WATCHDOG_ERROR);
+      $hybridauth_debug = 0;
+    }*/
+
+    /*$config = array(
+      'base_url' => 'http://127.0.0.1/d82/hybridauth/endpoint',
+      'providers' => array(),
+      'debug_mode' => $hybridauth_debug,
+      'debug_file' => $logfile,
+    );*/
+
+    /*if ($proxy = variable_get('hybridauth_proxy', NULL)) {
+      $config['proxy'] = $proxy;
+    }*/
+
+    /*foreach (hybridauth_get_enabled_providers() as $provider_id => $provider_name) {
+      if ($provider_config = hybridauth_get_provider_config($provider_id)) {
+        $config['providers'][$provider_id] = $provider_config;
+      }
+    }*/
+  }
+
+  $config = array(
+    'base_url' => 'http://127.0.0.1/d82/twitter-api/endpoint',
+    'providers' => array(
+      'Twitter' => array(
+        'enabled' => true,
+        'keys' => array(
+          'id' => '',
+          'key' => 'svE8J18C6m4eAp321ajcQ',
+          'secret' => 'dweUUSn0QRKSiSTSh69N1toK2Lo3dzThnX4gJYbdA',
+        ),
+        'scope' => '',
+        'display' => '',
+        'hauth_return_to' => 'http://127.0.0.1/d82/twitter-api/endpoint',
+      ),
+    ),
+    'debug_mode' => 0,
+    'debug_file' => '/tmp/hybridauth.debug.log',
+  );
+
+  return $config;
+}

@@ -22,6 +22,13 @@ twitter_api.logout_process:
     _title: 'Twitter Api logout Process'
   requirements:
     _permission: 'access content'
+twitter_api.endpoint:
+  path: '/twitter-api/endpoint'
+  defaults:
+    _controller: '\Drupal\twitter_api\Controller\TwitterApiController::endpoint'
+    _title: 'Twitter Api endpoint'
+  requirements:
+    _permission: 'access content'
 
 twitter_api.config_form:
   path: '/admin/config/twitter-api/config'
