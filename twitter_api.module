@@ -95,7 +95,7 @@ function hybridauth_get_config() {
   }
 
   $config = array(
-    'base_url' => 'http://127.0.0.1/d82/twitter-api/endpoint',
+    'base_url' => 'http://127.0.0.1/d81/twitter-api/endpoint',
     'providers' => array(
       'Twitter' => array(
         'enabled' => true,
@@ -106,7 +106,7 @@ function hybridauth_get_config() {
         ),
         'scope' => '',
         'display' => '',
-        'hauth_return_to' => 'http://127.0.0.1/d82/twitter-api/endpoint',
+        'hauth_return_to' => 'http://127.0.0.1/d81/twitter-api/endpoint',
       ),
     ),
     'debug_mode' => 0,
