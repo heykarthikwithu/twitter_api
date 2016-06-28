@@ -8,8 +8,6 @@
 namespace Drupal\twitter_api\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\twitter_api\Twitter\TwitterUsers;
-use Drupal\twitter_api\TwitterApiOAuth;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
