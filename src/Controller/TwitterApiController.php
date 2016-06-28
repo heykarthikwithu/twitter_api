@@ -7,6 +7,7 @@
 
 namespace Drupal\twitter_api\Controller;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -25,8 +26,17 @@ class TwitterApiController extends ControllerBase {
    */
   public function process() {
 
+    $consumer_key = 'svE8J18C6m4eAp321ajcQ';
+    $consumer_secret = 'dweUUSn0QRKSiSTSh69N1toK2Lo3dzThnX4gJYbdA';
+    $access_token = '630770314-xfh2TXlsStMmm7ggaA6arIwUDlwo8808ofMJM159';
+    $access_token_secret = 'WrzWDxJSblKls5OZQ6zqOYxBJrRC32TvzeCiIwWY6qAJm';
 
-    return 1;
+    $connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
+    $content = $connection->get("account/verify_credentials");
+    return [
+      '#type' => 'markup',
+      '#markup' => $this->t('Implement process method..!')
+    ];
     /*if ($hybridauth = hybridauth_get_instance()) {
       return $this->_hybridauth_window_auth($hybridauth, 'Twitter');
     }*/
