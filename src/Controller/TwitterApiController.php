@@ -25,9 +25,11 @@ class TwitterApiController extends ControllerBase {
    */
   public function process() {
 
-    if ($hybridauth = hybridauth_get_instance()) {
+
+    return 1;
+    /*if ($hybridauth = hybridauth_get_instance()) {
       return $this->_hybridauth_window_auth($hybridauth, 'Twitter');
-    }
+    }*/
   }
 
   public function logoutProcess() {

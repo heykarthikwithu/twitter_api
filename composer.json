@@ -1,6 +1,6 @@
 {
   "name": "drupal/twitter_api",
   "require" : {
-    "hybridauth/hybridauth" : "*"
+    "abraham/twitteroauth" : "*"
   }
 }
